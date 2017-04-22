@@ -1,5 +1,20 @@
 # Changelog - cct
 
+### 0.0.1-beta3
+
+__Changes__
+
+- fix handling of -keep argument
+- README
+
+__Contributors__
+
+- mh-cbon
+
+Released by mh-cbon, Sat 22 Apr 2017 -
+[see the diff](https://github.com/mh-cbon/cct/compare/0.0.1-beta2...0.0.1-beta3#diff)
+______________
+
 ### 0.0.1-beta2
 
 __Changes__
