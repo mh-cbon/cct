@@ -1,6 +1,6 @@
 # cct
 
-[![travis Status](https://travis-ci.org/mh-cbon/cct.svg?branch=master)](https://travis-ci.org/mh-cbon/cct)
+[![travis Status](https://travis-ci.org/mh-cbon/cct.svg?branch=master)](https://travis-ci.org/mh-cbon/cct) 
 [![appveyor Status](https://ci.appveyor.com/api/projects/status/github/mh-cbon/cct?branch=master&svg=true)](https://ci.appveyor.com/project/mh-cbon/cct) [![Go Report Card](https://goreportcard.com/badge/github.com/mh-cbon/cct)](https://goreportcard.com/report/github.com/mh-cbon/cct) [![GoDoc](https://godoc.org/github.com/mh-cbon/cct?status.svg)](http://godoc.org/github.com/mh-cbon/cct) [![MIT License](http://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Package cct is a cli program to run concurrent command lines
@@ -16,7 +16,7 @@ Package cct is a cli program to run concurrent command lines
 - [Usage](#usage)
   - [$ cct -version](#-cct--version)
   - [$ cct -help](#-cct--help)
-  - [$ cct -add|-a $bucket $cmd](#-cct--add|-a-bucket-cmd)
+  - [$ cct -add|-a [-timeout n] $bucket $cmd](#-cct--add|-a-[-timeout-n]-bucket-cmd)
   - [$ cct -wait|-w [-verbose] [-keep|-k] [-immediate|-i] [-json|-j] $bucket](#-cct--wait|-w-[-verbose]-[-keep|-k]-[-immediate|-i]-[-json|-j]-bucket)
   - [$ cct -backend [-verbose] [-timeout n]](#-cct--backend-[-verbose]-[-timeout-n])
 - [Example](#example)
@@ -69,7 +69,7 @@ cct is a cli program to run concurrent command lines
 
     Show this help
 
-#### $ cct -add|-a $bucket $cmd
+#### $ cct -add|-a [-timeout n] $bucket $cmd
 
     Add $cmd to given $bucket
 
@@ -97,7 +97,7 @@ cct is a cli program to run concurrent command lines
 
 #### add tasks to bucket 1
 
-    cct -a 1 sleep 2
+    cct -add -timeout 2 1 sleep 2
     cct -a 1 sleep 10
     cct -a 1 sleep 5
 
