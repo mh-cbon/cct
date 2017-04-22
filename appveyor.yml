@@ -23,6 +23,9 @@ install:
   - cmd /C C:\latest.bat mh-cbon go-msi amd64
   - set PATH=C:\Program Files\go-msi\;%PATH%
 
+build_script:
+  - go run main.go -help
+
 before_deploy:
   - set GOARCH=386
   - go build -o %APPVEYOR_PROJECT_NAME%.exe --ldflags "-X main.VERSION=%APPVEYOR_REPO_TAG_NAME%" main.go
