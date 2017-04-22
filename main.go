@@ -158,7 +158,7 @@ func showHelp() {
 
 #### add tasks to bucket 1
 
-    cct -a 1 sleep 2
+    cct -add -timeout 2 1 sleep 2
     cct -a 1 sleep 10
     cct -a 1 sleep 5
 
