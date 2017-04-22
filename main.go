@@ -87,22 +87,22 @@ func showHelp() {
 #### $ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket
 
     Wait for <bucket> commands completion, prints command results.
-    When a command of the bucket is finished, it is removed.
+    When a command of the bucket is finished and queried, it is removed.
 
-    - -immediate: prevent the program to wait for bucket completion before returning.
-    - -keep: prevent the program to remove finished commands of the bucket being queried.
+    __-immediate__: prevent the program to wait for bucket completion before returning.
+    __-keep__: prevent the program to remove finished commands of the bucket being queried.
 
 #### $ cct -backend [-verbose] [-timeout n]
 
     Start the backend to execute commands concurrently.
 
-    The backend automatically exists after duration <n> when
+    The backend automatically exits after duration <n> when
     - tasks list is empty
     - tasks are finished
 
-    The backend listens to http activity to delay the timeout.
+    The backend watches for all http activities and delay the timeout.
 
-    -__timeout n__: duration length before the backend exits.
+    -__timeout n__: duration length before the backend exits automatically.
 
 # Example
 
