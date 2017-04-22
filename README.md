@@ -101,12 +101,13 @@ cct is a cli program to run concurrent command lines
 
 #### add tasks to bucket 1
 
-		cct -a 1 sleep 2
-		cct -a 1 sleep 10
-		cct -a 1 sleep 5
+    cct -a 1 sleep 2
+    cct -a 1 sleep 10
+    cct -a 1 sleep 5
 
-		Note: using a one liner syntax would result in a totally different result!
-		cct -a 1 sleep 10;cct -a 1 sleep 10
+Note: using a one liner syntax would result in a totally different result!
+
+    cct -a 1 sleep 10;cct -a 1 sleep 10
 
 #### wait completion of the bucket 1
 
