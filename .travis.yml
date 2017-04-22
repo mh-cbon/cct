@@ -20,15 +20,9 @@ env:
 before_install:
   - sudo apt-get -qq update
   - mkdir -p ${GOPATH}/bin
-  - curl https://glide.sh/get | sh
-  - cd ~
-  - rvm use 2.2 --install --binary --fuzzy
-  - gem update --system
-  - gem --version
 
 install:
   - cd $GOPATH/src/github.com/$GH
-  - glide install
   - go install
 
 script:
