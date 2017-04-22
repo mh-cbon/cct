@@ -215,11 +215,16 @@ type CmdStatus struct {
 
 func runBackend(scheme, host, port string, restargs []string, duration int) {
 	timedout := make(chan bool)
+	httpfailed := make(chan error)
 	activity := make(chan bool)
 	getCmds := make(chan getTasksQuery)
-	go httpstart(port, activity, getCmds)
+	go httpstart(port, activity, httpfailed, getCmds)
 	go starttimeout(timedout, activity, getCmds, duration)
-	<-timedout
+	select {
+	case <-timedout:
+	case err := <-httpfailed:
+		logMsg("httpstart err %v", err)
+	}
 }
 
 func starttimeout(timedout chan bool, activity chan bool, getCmds chan getTasksQuery, duration int) {
@@ -250,7 +255,7 @@ type getTasksQuery struct {
 	ret chan []Task
 }
 
-func httpstart(port string, activity chan bool, getCmds chan getTasksQuery) {
+func httpstart(port string, activity chan bool, httpfailed chan error, getCmds chan getTasksQuery) {
 	startCmds := make(chan BucketCmd)
 	updateCmds := make(chan Task)
 	tasks := map[int]Task{}
@@ -335,8 +340,7 @@ func httpstart(port string, activity chan bool, getCmds chan getTasksQuery) {
 		json.NewEncoder(w).Encode(tasks)
 	})
 	logMsg("httpstart port %v", port)
-	err := http.ListenAndServe(":"+port, nil)
-	logMsg("httpstart err %v", err)
+	httpfailed <- http.ListenAndServe(":"+port, nil)
 }
 
 func runAdd(scheme, host, port string, restargs []string) {
