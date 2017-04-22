@@ -3,6 +3,8 @@
 [![appveyor Status](https://ci.appveyor.com/api/projects/status/github/mh-cbon/cct?branch=master&svg=true)](https://ci.appveyor.com/project/mh-cbon/cct) [![Go Report Card](https://goreportcard.com/badge/github.com/mh-cbon/cct)](https://goreportcard.com/report/github.com/mh-cbon/cct) [![GoDoc](https://godoc.org/github.com/mh-cbon/cct?status.svg)](http://godoc.org/github.com/mh-cbon/cct) [![MIT License](http://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 # cct
+cct is a cli program to run concurrent command lines
+
 # Usage
 
 ### $ cct -version
@@ -62,3 +64,14 @@
 
   Using __-keep__ and __-immediate__ options to query the bucket 1
   will give you the status of all tasks in this bucket.
+
+#### Release the project
+
+```sh
+gump patch -d # check
+gump patch # bump
+```
+
+# History
+
+[CHANGELOG](CHANGELOG.md)
