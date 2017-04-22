@@ -15,8 +15,8 @@ LicenseColor: yellow
 
 {{template "gh/releases" .}}
 
-#### glide
-{{template "glide/install" .}}
+#### go
+{{template "go/install" .}}
 
 #### linux rpm/deb repository
 {{template "linux/gh_src_repo" .}}
