@@ -5,16 +5,16 @@ Installed-Size: 5.2 kB
 Maintainer: mh-cbon <mh-cbon@users.noreply.github.com>
 Architecture: i386
 Source: cct
-Version: 0.0.1-beta2
-Filename: pool/contrib/c/cct/cct-0.0.1-beta2_386.deb
-Size: 1610354
-MD5sum: 7cd1146564956d5e3ef6c2ed26cdb1fa
-SHA1: 2451f52dd77cd1213e2c22d1deb91bf38a0c93f1
-SHA256: 07b37065cde45b538b1b6634ad61629680a062674236d3182cab20708af2ad46
-SHA512: 2c494f3d03a7e0ba2fd3e0b2bcfbb5916810e4dcd9830df0246e46f9c4acb8952d0ec0f83d685ca8f4db4cc839b0302b73c8bec347fb01e62d4d66570f57570c
+Version: 0.0.1-beta3
+Filename: pool/contrib/c/cct/cct-0.0.1-beta3_386.deb
+Size: 1610364
+MD5sum: abec8b5ec381437217662c76e5031013
+SHA1: e2850d17c685df0f537ddfd7047378bbc5dd5d0b
+SHA256: b9feaf0d6c1d3760701dc4bb3a1896260f7095340247724959a5f9bc26951b65
+SHA512: 207d3443c0b7cc62371f1d2e5e794b81cdd8d83e811667d4c367095cfc7fcebbb8251c2eac1754cd16fa2410e484bc648ffb4a1d539c844ec6914aa3c7ab467e
 Description: cct is a cli program to run concurrent command lines
-Homepage: http://github.com/mh-cbon/cct
 Package-Type: deb
+Homepage: http://github.com/mh-cbon/cct
 
 Package: cct
 Priority: extra
@@ -23,13 +23,13 @@ Installed-Size: 5.2 kB
 Maintainer: mh-cbon <mh-cbon@users.noreply.github.com>
 Architecture: i386
 Source: cct
-Version: 0.0.1-beta1
-Filename: pool/contrib/c/cct/cct-0.0.1-beta1_386.deb
-Size: 1609078
-MD5sum: 903a7d05f8ddebcacd25751cb2557e19
-SHA1: a3415899b5f9b84f50db429d8a2367332018c911
-SHA256: d8359410a4c2d7e9c478ed8088b2647a12d9cf3609b489f4bf242739cd1e006a
-SHA512: 29651b22b008df88c8b1c3140e86da75042035dfc6205274c47f6f60171eec41f7e2c53ad751d89a1d40cd0016a8b787dd5814f4a631f86e57c3ace569e39414
+Version: 0.0.1-beta2
+Filename: pool/contrib/c/cct/cct-0.0.1-beta2_386.deb
+Size: 1610354
+MD5sum: 7cd1146564956d5e3ef6c2ed26cdb1fa
+SHA1: 2451f52dd77cd1213e2c22d1deb91bf38a0c93f1
+SHA256: 07b37065cde45b538b1b6634ad61629680a062674236d3182cab20708af2ad46
+SHA512: 2c494f3d03a7e0ba2fd3e0b2bcfbb5916810e4dcd9830df0246e46f9c4acb8952d0ec0f83d685ca8f4db4cc839b0302b73c8bec347fb01e62d4d66570f57570c
 Description: cct is a cli program to run concurrent command lines
 Homepage: http://github.com/mh-cbon/cct
 Package-Type: deb
