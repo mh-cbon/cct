@@ -68,60 +68,68 @@ func showVersion() {
 	fmt.Printf("cct - %v\n", VERSION)
 }
 func showHelp() {
-	fmt.Printf("cct is a cli program to run concurrent command lines")
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("# Usage\n")
-	fmt.Printf("\n")
-	fmt.Printf("#### $ cct -version\n\n")
-	fmt.Printf("    Show version\n")
-	fmt.Printf("\n")
-	fmt.Printf("#### $ cct -help\n\n")
-	fmt.Printf("    Show this help\n")
-	fmt.Printf("\n")
-	fmt.Printf("#### $ cct -add $bucket $cmd\n\n")
-	fmt.Printf("    Add $cmd to given $bucket\n")
-	fmt.Printf("\n")
-	fmt.Printf("#### $ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket\n\n")
-	fmt.Printf("    Wait for <bucket> commands completion, prints command results.\n")
-	fmt.Printf("    When a command of the bucket is finished, it is removed.\n\n")
-	fmt.Printf("    - -immediate: prevent the program to wait for bucket completion before returning.\n")
-	fmt.Printf("    - -keep: prevent the program to remove finished commands of the bucket being queried.\n")
-	fmt.Printf("\n")
-	fmt.Printf("#### $ cct -backend [-verbose] [-timeout n]\n\n")
-	fmt.Printf("    Start the backend to execute commands concurrently.\n\n")
-	fmt.Printf("    The backend automatically exists after duration <n> when\n")
-	fmt.Printf("    - tasks list is empty\n")
-	fmt.Printf("    - tasks are finished\n\n")
-	fmt.Printf("    The backend listens to http activity to delay the timeout.\n\n")
-	fmt.Printf("    -__timeout n__: duration length before the backend exits.\n")
-	fmt.Printf("\n")
-	fmt.Printf("# Example\n")
-	fmt.Printf("\n")
-	fmt.Printf("#### add a tasks to bucket 1\n")
-	fmt.Printf("\n")
-	fmt.Printf("    cct -add 1 ls -al\n")
-	fmt.Printf("    cct -add 1 wait 10\n")
-	fmt.Printf("    cct -add 1 wait 5\n")
-	fmt.Printf("\n")
-	fmt.Printf("#### wait completion of the bucket 1\n")
-	fmt.Printf("\n")
-	fmt.Printf("    cct -wait 1\n")
-	fmt.Printf("\n")
-	fmt.Printf("  This command will wait for the completion of all three commands added to the bucket 1\n")
-	fmt.Printf("\n")
-	fmt.Printf("    cct -wait 1\n")
-	fmt.Printf("\n")
-	fmt.Printf("  Running the command againg will immediately return an empty result\n")
-	fmt.Printf("  as the bucket 1 has been emptied by the previous call.\n")
-	fmt.Printf("\n")
-	fmt.Printf("#### get status of the bucket 1\n")
-	fmt.Printf("\n")
-	fmt.Printf("    cct -wait -keep -immediate -json 1\n")
-	fmt.Printf("\n")
-	fmt.Printf("  Using __-keep__ and __-immediate__ options to query the bucket 1\n")
-	fmt.Printf("  will give you the status of all tasks in this bucket.\n")
-	fmt.Printf("\n")
+	fmt.Printf(`cct is a cli program to run concurrent command lines
+
+# Usage
+
+#### $ cct -version
+
+    Show version
+
+#### $ cct -help
+
+    Show this help
+
+#### $ cct -add $bucket $cmd
+
+    Add $cmd to given $bucket
+
+#### $ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket
+
+    Wait for <bucket> commands completion, prints command results.
+    When a command of the bucket is finished, it is removed.
+
+    - -immediate: prevent the program to wait for bucket completion before returning.
+    - -keep: prevent the program to remove finished commands of the bucket being queried.
+
+#### $ cct -backend [-verbose] [-timeout n]
+
+    Start the backend to execute commands concurrently.
+
+    The backend automatically exists after duration <n> when
+    - tasks list is empty
+    - tasks are finished
+
+    The backend listens to http activity to delay the timeout.
+
+    -__timeout n__: duration length before the backend exits.
+
+# Example
+
+#### add a tasks to bucket 1
+
+    cct -add 1 ls -al
+    cct -add 1 wait 10
+    cct -add 1 wait 5
+
+#### wait completion of the bucket 1
+
+    cct -wait 1
+
+  This command will wait for the completion of all three commands added to the bucket 1
+
+    cct -wait 1
+
+  Running the command againg will immediately return an empty result
+  as the bucket 1 has been emptied by the previous call.
+
+#### get status of the bucket 1
+
+    cct -wait -keep -immediate -json 1
+
+  Using __-keep__ and __-immediate__ options to query the bucket 1
+  will give you the status of all tasks in this bucket.
+`)
 }
 
 // BucketCmd is a cmd to put in a bucket
