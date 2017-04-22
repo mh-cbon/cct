@@ -106,7 +106,7 @@ func showHelp() {
 
 # Example
 
-#### add a tasks to bucket 1
+#### add tasks to bucket 1
 
     cct -add 1 ls -al
     cct -add 1 wait 10

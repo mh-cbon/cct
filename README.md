@@ -20,7 +20,7 @@ Package cct is a cli program to run concurrent command lines
   - [$ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket](#-cct--wait-[-verbose]-[-keep]-[-immediate]-[-json]-bucket)
   - [$ cct -backend [-verbose] [-timeout n]](#-cct--backend-[-verbose]-[-timeout-n])
 - [Example](#example)
-  - [add a tasks to bucket 1](#add-a-tasks-to-bucket-1)
+  - [add tasks to bucket 1](#add-tasks-to-bucket-1)
   - [wait completion of the bucket 1](#wait-completion-of-the-bucket-1)
   - [get status of the bucket 1](#get-status-of-the-bucket-1)
   - [Release the project](#release-the-project)
@@ -99,7 +99,7 @@ cct is a cli program to run concurrent command lines
 
 # Example
 
-#### add a tasks to bucket 1
+#### add tasks to bucket 1
 
     cct -add 1 ls -al
     cct -add 1 wait 10
