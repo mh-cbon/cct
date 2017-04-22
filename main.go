@@ -25,39 +25,69 @@ func logMsg(f string, s ...interface{}) {
 	}
 }
 
+type cliOpts struct {
+	scheme     string
+	host       string
+	port       string
+	duration   int
+	backend    bool
+	add        bool
+	wait       bool
+	immediate  bool
+	keep       bool
+	verbose    bool
+	outputJSON bool
+	help       bool
+	showVer    bool
+}
+
 func main() {
 
-	scheme := flag.String("scheme", "http", "scheme of the backend")
-	host := flag.String("host", "localhost", "host of the backend")
-	port := flag.String("port", "9999", "port of the backend")
-	duration := flag.Int("timeout", 60, "timeout of the backend")
-	backend := flag.Bool("backend", false, "run the backend")
-	add := flag.Bool("add", false, "add task to the backend")
-	wait := flag.Bool("wait", false, "wait task to end")
-	immediate := flag.Bool("immediate", false, "do not wait for tasks to finish")
-	keep := flag.Bool("keep", false, "keep tasks in the backlog")
-	verbose := flag.Bool("verbose", false, "verbose")
-	help := flag.Bool("help", false, "help")
-	showVer := flag.Bool("version", false, "show version")
+	cliopts := cliOpts{
+		scheme:   "http",
+		host:     "localhost",
+		port:     "9999",
+		duration: 50,
+	}
+
+	flag.StringVar(&cliopts.scheme, "scheme", cliopts.scheme, "scheme of the backend")
+	flag.StringVar(&cliopts.host, "host", cliopts.host, "host of the backend")
+	flag.StringVar(&cliopts.port, "port", cliopts.port, "port of the backend")
+	flag.IntVar(&cliopts.duration, "timeout", cliopts.duration, "timeout of the backend")
+	flag.BoolVar(&cliopts.backend, "backend", cliopts.backend, "run the backend")
+	flag.BoolVar(&cliopts.add, "add", cliopts.add, "add task to the backend")
+	flag.BoolVar(&cliopts.wait, "wait", cliopts.wait, "wait task to end")
+	flag.BoolVar(&cliopts.immediate, "immediate", cliopts.immediate, "do not wait for tasks to finish")
+	flag.BoolVar(&cliopts.keep, "keep", cliopts.keep, "keep tasks in the backlog")
+	flag.BoolVar(&cliopts.verbose, "verbose", cliopts.verbose, "verbose")
+	flag.BoolVar(&cliopts.outputJSON, "json", cliopts.outputJSON, "json")
+	flag.BoolVar(&cliopts.help, "help", cliopts.help, "help")
+	flag.BoolVar(&cliopts.showVer, "version", cliopts.showVer, "show version")
+
 	flag.Parse()
 	restargs := flag.Args()
 
-	showLog = *verbose
+	showLog = cliopts.verbose
 
 	logMsg("restargs %v", restargs)
-	logMsg("backend %v", *backend)
+	logMsg("backend %v", cliopts.backend)
 
-	if *help {
+	if cliopts.help {
 		showVersion()
 		showHelp()
-	} else if *showVer {
+
+	} else if cliopts.showVer {
 		showVersion()
-	} else if *backend {
-		runBackend(*scheme, *host, *port, restargs, *duration)
-	} else if *add {
-		runAdd(*scheme, *host, *port, restargs)
-	} else if *wait {
-		runWait(*scheme, *host, *port, restargs, *immediate, *keep)
+
+	} else if cliopts.backend {
+		runBackend(cliopts.scheme, cliopts.host, cliopts.port, restargs, cliopts.duration)
+
+	} else if cliopts.add {
+		runAdd(cliopts.scheme, cliopts.host, cliopts.port, restargs)
+
+	} else if cliopts.wait {
+		runWait(cliopts.scheme, cliopts.host, cliopts.port, restargs, cliopts.immediate, cliopts.keep, cliopts.outputJSON)
+
 	} else {
 		showHelp()
 	}
@@ -152,7 +182,7 @@ type Task struct {
 type CmdStatus struct {
 	Started bool
 	Ended   bool
-	Output  []byte
+	Output  string
 	Error   string
 }
 
@@ -210,7 +240,7 @@ func httpstart(port string, activity chan bool, getCmds chan getTasksQuery) {
 				if err != nil {
 					task.Status.Error = err.Error()
 				}
-				task.Status.Output = out
+				task.Status.Output = string(out)
 				task.Status.Ended = true
 				updateCmds <- task
 			}()
@@ -302,7 +332,7 @@ func runAdd(scheme, host, port string, restargs []string) {
 		Bin:  restargs[1],
 		Args: restargs[2:],
 	}
-	logMsg("runAdd cmd %v", cmd)
+	logMsg("runAdd cmd %#v", cmd)
 
 	addURL := fmt.Sprintf("%v://%v:%v/add", scheme, host, port)
 	logMsg("runAdd addURL %v", addURL)
@@ -367,7 +397,7 @@ func tasksAllDone(tasks []Task) bool {
 	return allDone
 }
 
-func runWait(scheme, host, port string, restargs []string, immediate, keep bool) {
+func runWait(scheme, host, port string, restargs []string, immediate, keep, outputJSON bool) {
 
 	if len(restargs) == 0 {
 		log.Fatal("missing bucket name")
@@ -389,10 +419,17 @@ func runWait(scheme, host, port string, restargs []string, immediate, keep bool)
 		}
 		tasks = getTasks(tasksURL, opt)
 	}
-	for _, task := range tasks {
-		fmt.Printf("$ %v %v\n", task.Cmd.Bin, strings.Join(task.Cmd.Args, " "))
-		fmt.Printf("%v", string(task.Status.Output))
-		fmt.Printf("%v", task.Status.Error)
+
+	if outputJSON {
+		e := json.NewEncoder(os.Stdout)
+		e.SetIndent("", "  ")
+		e.Encode(tasks)
+	} else {
+		for _, task := range tasks {
+			fmt.Printf("$ %v %v\n", task.Cmd.Bin, strings.Join(task.Cmd.Args, " "))
+			fmt.Printf("%v", string(task.Status.Output))
+			fmt.Printf("%v", task.Status.Error)
+		}
 	}
 }
 
