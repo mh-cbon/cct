@@ -1,5 +1,19 @@
 # Changelog - cct
 
+### 0.0.1-beta4
+
+__Changes__
+
+- backend: fix exit when port is in use
+
+__Contributors__
+
+- mh-cbon
+
+Released by mh-cbon, Sat 22 Apr 2017 -
+[see the diff](https://github.com/mh-cbon/cct/compare/0.0.1-beta3...0.0.1-beta4#diff)
+______________
+
 ### 0.0.1-beta3
 
 __Changes__
