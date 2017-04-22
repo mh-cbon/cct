@@ -1,0 +1,62 @@
+sudo: required
+
+services:
+  - docker
+
+language: go
+go:
+  - 1.8
+
+env:
+  global:
+    - GH=mh-cbon/cct
+    - JEKYLL=pietromenna/jekyll-cayman-theme
+    - APP=cct
+    - EMAIL=mh-cbon@users.noreply.github.com
+    - MYAPP=cct
+    - MYEMAIL=mh-cbon@users.noreply.github.com
+    - secure: ojhYDaFGbkS3pVxhwqMKFZXcQtkoayb3LrB7Bc3VHE2Qc5RS3LkAu37/yBxpfpr/gYkKbdWgSbhTL7k4YrCXY44/msVdLAmaMj83fbIUiwW6sxQtidydmDWAzXZdj2PRgp9RGlyAG0LB3jQjnBafsKcOWncni/ZTqewpI0DJOp+NL8VK/IRpmnucE9vpkr811M4aUTWFbPlqY9Rp70ou82unWWKsWsmc6rGA06zG5TNdzcpC3akdngsdknhDhKw8SbJs4kWYxMQvmhQ8j9trWDnS0R4ET3aPLtdQMuV/Ym8eN3MFJp6TGvjoHWJ06t35fWFh1ETSNzGKsp+MCIahtj9CbhHmKh7EtGPI+XdK8gmJHAfAIjTdJ79bvzBMnSHjSTBNsKPGlmXwamfEczfYfeHL2/R5yIn3JziNhitNgfyBC8IsIVLFPaJdcVZvwL3A8BpzBZyTW5APPI9UBs2FbCv7Ktk1CNahBpLGrJZHyliE/c+CqFxdWT44ZX/iWe8pfybI76UNJg9SXjLyCz0a8u+n9ZrNhG12qZa367fu4647WPpV5KiYozUZr0sQg9LKS8i9ce6VY1XeP+BG/FXSjdzXuPVwAur4qsaj1NjmSruIbDWZsW7laMlFXS6jhENfVp32Rza0qKRyEbMbcTrlf2kWucpqFNH74CD6oKjs5dU=
+
+before_install:
+  - sudo apt-get -qq update
+  - mkdir -p ${GOPATH}/bin
+  - curl https://glide.sh/get | sh
+  - cd ~
+  - rvm use 2.2 --install --binary --fuzzy
+  - gem update --system
+  - gem --version
+
+install:
+  - cd $GOPATH/src/github.com/$GH
+  - glide install
+  - go install
+
+script:
+  - echo "pass"
+
+
+before_deploy:
+  - mkdir -p build/{386,amd64}
+  - GOOS=linux GOARCH=386 go build --ldflags "-X main.VERSION=${TRAVIS_TAG}" -o build/386/$APP main.go
+  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.VERSION=${TRAVIS_TAG}" -o build/amd64/$APP main.go
+  - curl -L https://raw.githubusercontent.com/mh-cbon/go-bin-deb/master/create-pkg.sh | GH=$GH sh -xe
+  - curl -L https://raw.githubusercontent.com/mh-cbon/go-bin-rpm/master/create-pkg.sh | GH=$GH sh -xe
+
+after_deploy:
+  - wget -O - https://raw.githubusercontent.com/mh-cbon/gh-pages/master/all.sh | sh -x
+  - curl -L https://raw.githubusercontent.com/mh-cbon/go-bin-deb/master/setup-repository.sh | GH=$GH EMAIL=$EMAIL sh -xe
+  - curl -L https://raw.githubusercontent.com/mh-cbon/go-bin-rpm/master/setup-repository.sh | GH=$GH EMAIL=$EMAIL sh -xe
+
+deploy:
+  provider: releases
+  api_key:
+    - secure: ojhYDaFGbkS3pVxhwqMKFZXcQtkoayb3LrB7Bc3VHE2Qc5RS3LkAu37/yBxpfpr/gYkKbdWgSbhTL7k4YrCXY44/msVdLAmaMj83fbIUiwW6sxQtidydmDWAzXZdj2PRgp9RGlyAG0LB3jQjnBafsKcOWncni/ZTqewpI0DJOp+NL8VK/IRpmnucE9vpkr811M4aUTWFbPlqY9Rp70ou82unWWKsWsmc6rGA06zG5TNdzcpC3akdngsdknhDhKw8SbJs4kWYxMQvmhQ8j9trWDnS0R4ET3aPLtdQMuV/Ym8eN3MFJp6TGvjoHWJ06t35fWFh1ETSNzGKsp+MCIahtj9CbhHmKh7EtGPI+XdK8gmJHAfAIjTdJ79bvzBMnSHjSTBNsKPGlmXwamfEczfYfeHL2/R5yIn3JziNhitNgfyBC8IsIVLFPaJdcVZvwL3A8BpzBZyTW5APPI9UBs2FbCv7Ktk1CNahBpLGrJZHyliE/c+CqFxdWT44ZX/iWe8pfybI76UNJg9SXjLyCz0a8u+n9ZrNhG12qZa367fu4647WPpV5KiYozUZr0sQg9LKS8i9ce6VY1XeP+BG/FXSjdzXuPVwAur4qsaj1NjmSruIbDWZsW7laMlFXS6jhENfVp32Rza0qKRyEbMbcTrlf2kWucpqFNH74CD6oKjs5dU=
+  file_glob: true
+  file:
+    - $APP-386.deb
+    - $APP-amd64.deb
+    - $APP-386.rpm
+    - $APP-amd64.rpm
+  skip_cleanup: true
+  on:
+    tags: true

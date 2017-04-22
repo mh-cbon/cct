@@ -1,3 +1,4 @@
+// Package cct is a cli program to run concurrent command lines
 package main
 
 import (
@@ -67,6 +68,8 @@ func showVersion() {
 	fmt.Printf("cct - %v\n", VERSION)
 }
 func showHelp() {
+	fmt.Printf("cct is a cli program to run concurrent command lines")
+	fmt.Printf("\n")
 	fmt.Printf("\n")
 	fmt.Printf("# Usage\n")
 	fmt.Printf("\n")
