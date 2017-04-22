@@ -48,8 +48,34 @@
     <ul>
       <li><a href="#-cct--version">$ cct -version</a></li>
       <li><a href="#-cct--help">$ cct -help</a></li>
-      <li><a href="#-cct--add-bucket-cmd">$ cct -add $bucket $cmd</a></li>
-      <li><a href="#-cct--wait-[-verbose]-[-keep]-[-immediate]-[-json]-bucket">$ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket</a></li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>[$ cct -add</td>
+              <td>-a $bucket $cmd](#-cct–add</td>
+              <td>-a-bucket-cmd)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>[$ cct -wait</td>
+              <td>-w [-verbose] [-keep</td>
+              <td>-k] [-immediate</td>
+              <td>-i] [-json</td>
+              <td>-j] $bucket](#-cct–wait</td>
+              <td>-w-[-verbose]-[-keep</td>
+              <td>-k]-[-immediate</td>
+              <td>-i]-[-json</td>
+              <td>-j]-bucket)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
       <li><a href="#-cct--backend-[-verbose]-[-timeout-n]">$ cct -backend [-verbose] [-timeout n]</a></li>
     </ul>
   </li>
@@ -115,13 +141,13 @@ https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh <span class="
 </code></pre>
 </div>
 
-<h4 id="-cct--add-bucket-cmd">$ cct -add $bucket $cmd</h4>
+<h4 id="-cct--add-a-bucket-cmd">$ cct -add|-a $bucket $cmd</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Add $cmd to given $bucket
 </code></pre>
 </div>
 
-<h4 id="-cct--wait--verbose--keep--immediate--json-bucket">$ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket</h4>
+<h4 id="-cct--wait-w--verbose--keep-k--immediate-i--json-j-bucket">$ cct -wait|-w [-verbose] [-keep|-k] [-immediate|-i] [-json|-j] $bucket</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Wait for &lt;bucket&gt; commands completion, prints command results.
 When a command of the bucket is finished and queried, it is removed.
@@ -149,9 +175,12 @@ The backend watches for all http activities and delay the timeout.
 
 <h4 id="add-tasks-to-bucket-1">add tasks to bucket 1</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cct -add 1 ls -al
-cct -add 1 sleep 10
-cct -add 1 sleep 5
+<div class="highlighter-rouge"><pre class="highlight"><code>	cct -a 1 sleep 2
+	cct -a 1 sleep 10
+	cct -a 1 sleep 5
+
+	Note: using a one liner syntax would result in a totally different result!
+	cct -a 1 sleep 10;cct -a 1 sleep 10
 </code></pre>
 </div>
 
@@ -163,7 +192,7 @@ cct -add 1 sleep 5
 
 <p>This command will wait for the completion of all three commands added to the bucket 1</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cct -wait 1
+<div class="highlighter-rouge"><pre class="highlight"><code>cct -w 1
 </code></pre>
 </div>
 
@@ -173,14 +202,16 @@ cct -add 1 sleep 5
 
 <h4 id="query-status-of-the-bucket-1">query status of the bucket 1</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cct -wait -keep -immediate -json 1
+<div class="highlighter-rouge"><pre class="highlight"><code>cct -w -k -i -j 1
 </code></pre>
 </div>
 
-<p>Use -keep and -immediate options to only
+<p>Use [-keep|-k] and [-immediate|-i] options to only
 	query the status of every commands in the bucket 1.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Those options prevent the bucket to be emptied.
+
+Use [-json|-j] option to return a JSON obect of []Task.
 </code></pre>
 </div>
 
