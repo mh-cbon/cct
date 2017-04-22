@@ -1,6 +1,6 @@
 # cct
 
-[![travis Status](https://travis-ci.org/mh-cbon/cct.svg?branch=master)](https://travis-ci.org/mh-cbon/cct) 
+[![travis Status](https://travis-ci.org/mh-cbon/cct.svg?branch=master)](https://travis-ci.org/mh-cbon/cct)
 [![appveyor Status](https://ci.appveyor.com/api/projects/status/github/mh-cbon/cct?branch=master&svg=true)](https://ci.appveyor.com/project/mh-cbon/cct) [![Go Report Card](https://goreportcard.com/badge/github.com/mh-cbon/cct)](https://goreportcard.com/report/github.com/mh-cbon/cct) [![GoDoc](https://godoc.org/github.com/mh-cbon/cct?status.svg)](http://godoc.org/github.com/mh-cbon/cct) [![MIT License](http://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Package cct is a cli program to run concurrent command lines

@@ -100,7 +100,7 @@ func main() {
 		runBackend(cliopts.scheme, cliopts.host, cliopts.port, restargs, cliopts.duration)
 
 	} else if cliopts.add || cliopts.a {
-		runAdd(cliopts.scheme, cliopts.host, cliopts.port, restargs)
+		runAdd(cliopts.scheme, cliopts.host, cliopts.port, restargs, cliopts.duration)
 
 	} else if cliopts.wait || cliopts.w {
 		runWait(cliopts.scheme, cliopts.host, cliopts.port, restargs,
@@ -130,7 +130,7 @@ func showHelp() {
 
     Show this help
 
-#### $ cct -add|-a $bucket $cmd
+#### $ cct -add|-a [-timeout n] $bucket $cmd
 
     Add $cmd to given $bucket
 
@@ -343,7 +343,7 @@ func httpstart(port string, activity chan bool, httpfailed chan error, getCmds c
 	httpfailed <- http.ListenAndServe(":"+port, nil)
 }
 
-func runAdd(scheme, host, port string, restargs []string) {
+func runAdd(scheme, host, port string, restargs []string, duration int) {
 
 	if len(restargs) == 0 {
 		log.Fatal("missing bucket name")
@@ -355,7 +355,7 @@ func runAdd(scheme, host, port string, restargs []string) {
 	logMsg("runAdd pingURL %v", pingURL)
 
 	if ping(pingURL) == false {
-		fork(scheme, host, port)
+		fork(scheme, host, port, duration)
 		pingUntilReady(pingURL)
 	}
 
@@ -374,13 +374,13 @@ func runAdd(scheme, host, port string, restargs []string) {
 	}
 }
 
-func fork(scheme, host, port string) {
+func fork(scheme, host, port string, duration int) {
 	bin, err := os.Executable()
 	if err != nil {
 		panic(err)
 	}
 	logMsg("fork bin %v", bin)
-	args := []string{"-backend", "-scheme", scheme, "-host", host, "-port", port}
+	args := []string{"-backend", "-scheme", scheme, "-host", host, "-port", port, "-timeout", fmt.Sprintf("%v", duration)}
 	logMsg("fork args %v", args)
 	cmd := exec.Command(bin, args...)
 	if cmd.Start() == nil {
