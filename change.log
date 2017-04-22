@@ -1,4 +1,15 @@
 
+0.0.1-beta3
+
+  * fix handling of -keep argument
+  * README
+
+  - mh-cbon <mh-cbon@users.noreply.github.com>
+
+-- mh-cbon <mh-cbon@users.noreply.github.com>; Sat, 22 Apr 2017 19:25:11 +0200
+
+
+
 0.0.1-beta2
 
   * improve cli args, fixed tasks flush
