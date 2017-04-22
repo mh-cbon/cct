@@ -1,8 +1,72 @@
+# cct
 
 [![travis Status](https://travis-ci.org/mh-cbon/cct.svg?branch=master)](https://travis-ci.org/mh-cbon/cct) 
 [![appveyor Status](https://ci.appveyor.com/api/projects/status/github/mh-cbon/cct?branch=master&svg=true)](https://ci.appveyor.com/project/mh-cbon/cct) [![Go Report Card](https://goreportcard.com/badge/github.com/mh-cbon/cct)](https://goreportcard.com/report/github.com/mh-cbon/cct) [![GoDoc](https://godoc.org/github.com/mh-cbon/cct?status.svg)](http://godoc.org/github.com/mh-cbon/cct) [![MIT License](http://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-# cct
+Package cct is a cli program to run concurrent command lines
+
+
+# TOC
+- [Install](#install)
+  - [glide](#glide)
+  - [Chocolatey](#chocolatey)
+  - [linux rpm/deb repository](#linux-rpmdeb-repository)
+  - [linux rpm/deb standalone package](#linux-rpmdeb-standalone-package)
+- [Cli](#cli)
+  - [cct](#cct-1)
+- [Usage](#usage)
+  - [$ cct -version](#-cct--version)
+  - [$ cct -help](#-cct--help)
+  - [$ cct -add <bucket> <cmd>](#-cct--add-<bucket-<cmd)
+  - [$ cct -wait [-verbose] [-keep] [-immediate] [-json] <bucket>](#-cct--wait-[-verbose]-[-keep]-[-immediate]-[-json]-<bucket)
+  - [$ cct -backend [-verbose] [-timeout n]](#-cct--backend-[-verbose]-[-timeout-n])
+- [Example](#example)
+  - [add a tasks to bucket 1](#add-a-tasks-to-bucket-1)
+  - [wait completion of the bucket 1](#wait-completion-of-the-bucket-1)
+  - [get status of the bucket 1](#get-status-of-the-bucket-1)
+    - [Release the project](#release-the-project)
+  - [History](#history)
+
+# Install
+
+Check the [release page](https://github.com/mh-cbon/cct/releases)!
+
+#### glide
+```sh
+mkdir -p $GOPATH/src/github.com/mh-cbon/cct
+cd $GOPATH/src/github.com/mh-cbon/cct
+git clone https://github.com/mh-cbon/cct.git .
+glide install
+go install
+```
+
+#### Chocolatey
+```sh
+choco install cct
+```
+
+#### linux rpm/deb repository
+```sh
+wget -O - https://raw.githubusercontent.com/mh-cbon/latest/master/source.sh \
+| GH=mh-cbon/cct sh -xe
+# or
+curl -L https://raw.githubusercontent.com/mh-cbon/latest/master/source.sh \
+| GH=mh-cbon/cct sh -xe
+```
+
+#### linux rpm/deb standalone package
+```sh
+curl -L https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh \
+| GH=mh-cbon/cct sh -xe
+# or
+wget -q -O - --no-check-certificate \
+https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh \
+| GH=mh-cbon/cct sh -xe
+```
+
+# Cli
+
+## cct
 cct is a cli program to run concurrent command lines
 
 # Usage
