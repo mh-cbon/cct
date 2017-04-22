@@ -1,6 +1,6 @@
 # cct
 
-[![travis Status](https://travis-ci.org/mh-cbon/cct.svg?branch=master)](https://travis-ci.org/mh-cbon/cct) 
+[![travis Status](https://travis-ci.org/mh-cbon/cct.svg?branch=master)](https://travis-ci.org/mh-cbon/cct)
 [![appveyor Status](https://ci.appveyor.com/api/projects/status/github/mh-cbon/cct?branch=master&svg=true)](https://ci.appveyor.com/project/mh-cbon/cct) [![Go Report Card](https://goreportcard.com/badge/github.com/mh-cbon/cct)](https://goreportcard.com/report/github.com/mh-cbon/cct) [![GoDoc](https://godoc.org/github.com/mh-cbon/cct?status.svg)](http://godoc.org/github.com/mh-cbon/cct) [![MIT License](http://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Package cct is a cli program to run concurrent command lines
@@ -101,9 +101,11 @@ cct is a cli program to run concurrent command lines
 
 #### add tasks to bucket 1
 
-    cct -add 1 ls -al
+    go install
+    cct -add 1 sleep 2
     cct -add 1 sleep 10
     cct -add 1 sleep 5
+    cct -wait -verbose 1
 
 #### wait completion of the bucket 1
 

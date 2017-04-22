@@ -32,11 +32,16 @@ type cliOpts struct {
 	duration   int
 	backend    bool
 	add        bool
+	a          bool
 	wait       bool
+	w          bool
 	immediate  bool
+	i          bool
 	keep       bool
+	k          bool
 	verbose    bool
 	outputJSON bool
+	j          bool
 	help       bool
 	showVer    bool
 }
@@ -53,14 +58,26 @@ func main() {
 	flag.StringVar(&cliopts.scheme, "scheme", cliopts.scheme, "scheme of the backend")
 	flag.StringVar(&cliopts.host, "host", cliopts.host, "host of the backend")
 	flag.StringVar(&cliopts.port, "port", cliopts.port, "port of the backend")
-	flag.IntVar(&cliopts.duration, "timeout", cliopts.duration, "timeout of the backend")
+
 	flag.BoolVar(&cliopts.backend, "backend", cliopts.backend, "run the backend")
+	flag.IntVar(&cliopts.duration, "timeout", cliopts.duration, "timeout of the backend")
+
 	flag.BoolVar(&cliopts.add, "add", cliopts.add, "add task to the backend")
+	flag.BoolVar(&cliopts.a, "a", cliopts.add, "alias -add")
+
 	flag.BoolVar(&cliopts.wait, "wait", cliopts.wait, "wait task to end")
+	flag.BoolVar(&cliopts.w, "w", cliopts.wait, "alias -wait")
+
 	flag.BoolVar(&cliopts.immediate, "immediate", cliopts.immediate, "do not wait for tasks to finish")
+	flag.BoolVar(&cliopts.i, "i", cliopts.immediate, "alias -immediate")
+
 	flag.BoolVar(&cliopts.keep, "keep", cliopts.keep, "keep tasks in the backlog")
+	flag.BoolVar(&cliopts.k, "k", cliopts.keep, "aliass -keep")
+
+	flag.BoolVar(&cliopts.outputJSON, "json", cliopts.outputJSON, "output json")
+	flag.BoolVar(&cliopts.j, "j", cliopts.outputJSON, "alias -json")
+
 	flag.BoolVar(&cliopts.verbose, "verbose", cliopts.verbose, "verbose")
-	flag.BoolVar(&cliopts.outputJSON, "json", cliopts.outputJSON, "json")
 	flag.BoolVar(&cliopts.help, "help", cliopts.help, "help")
 	flag.BoolVar(&cliopts.showVer, "version", cliopts.showVer, "show version")
 
@@ -70,7 +87,7 @@ func main() {
 	showLog = cliopts.verbose
 
 	logMsg("restargs %v", restargs)
-	logMsg("backend %v", cliopts.backend)
+	logMsg("cliopts %#v", cliopts)
 
 	if cliopts.help {
 		showVersion()
@@ -82,11 +99,15 @@ func main() {
 	} else if cliopts.backend {
 		runBackend(cliopts.scheme, cliopts.host, cliopts.port, restargs, cliopts.duration)
 
-	} else if cliopts.add {
+	} else if cliopts.add || cliopts.a {
 		runAdd(cliopts.scheme, cliopts.host, cliopts.port, restargs)
 
-	} else if cliopts.wait {
-		runWait(cliopts.scheme, cliopts.host, cliopts.port, restargs, cliopts.immediate, cliopts.keep, cliopts.outputJSON)
+	} else if cliopts.wait || cliopts.w {
+		runWait(cliopts.scheme, cliopts.host, cliopts.port, restargs,
+			cliopts.immediate || cliopts.i,
+			cliopts.keep || cliopts.k,
+			cliopts.outputJSON || cliopts.j,
+		)
 
 	} else {
 		showHelp()
@@ -109,11 +130,11 @@ func showHelp() {
 
     Show this help
 
-#### $ cct -add $bucket $cmd
+#### $ cct -add|-a $bucket $cmd
 
     Add $cmd to given $bucket
 
-#### $ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket
+#### $ cct -wait|-w [-verbose] [-keep|-k] [-immediate|-i] [-json|-j] $bucket
 
     Wait for <bucket> commands completion, prints command results.
     When a command of the bucket is finished and queried, it is removed.
@@ -137,9 +158,12 @@ func showHelp() {
 
 #### add tasks to bucket 1
 
-    cct -add 1 ls -al
-    cct -add 1 sleep 10
-    cct -add 1 sleep 5
+		cct -a 1 sleep 2
+		cct -a 1 sleep 10
+		cct -a 1 sleep 5
+
+		Note: using a one liner syntax would result in a totally different result!
+		cct -a 1 sleep 10;cct -a 1 sleep 10
 
 #### wait completion of the bucket 1
 
@@ -147,7 +171,7 @@ func showHelp() {
 
   This command will wait for the completion of all three commands added to the bucket 1
 
-    cct -wait 1
+    cct -w 1
 
   Running the command again will return immediately,
 	the response is an empty list
@@ -155,12 +179,14 @@ func showHelp() {
 
 #### query status of the bucket 1
 
-    cct -wait -keep -immediate -json 1
+    cct -w -k -i -j 1
 
-  Use -keep and -immediate options to only
+  Use [-keep|-k] and [-immediate|-i] options to only
 	query the status of every commands in the bucket 1.
 
 	Those options prevent the bucket to be emptied.
+
+	Use [-json|-j] option to return a JSON obect of []Task.
 `)
 }
 
@@ -259,6 +285,7 @@ func httpstart(port string, activity chan bool, getCmds chan getTasksQuery) {
 					if t.Cmd.Name == query.opt.Bucket || query.opt.Bucket == "" {
 						ret = append(ret, t)
 						if query.opt.Keep == false {
+							logMsg("getCmds remove %v", t)
 							delete(tasks, t.ID)
 						}
 					}
@@ -380,9 +407,8 @@ func pingUntilReady(url string) {
 
 // GetTasksOptions is the options to use when getting tasks
 type GetTasksOptions struct {
-	Bucket    string
-	Immediate bool
-	Keep      bool
+	Bucket string
+	Keep   bool
 }
 
 func tasksAllDone(tasks []Task) bool {
@@ -405,9 +431,8 @@ func runWait(scheme, host, port string, restargs []string, immediate, keep, outp
 
 	tasksURL := fmt.Sprintf("%v://%v:%v/tasks", scheme, host, port)
 	opt := GetTasksOptions{
-		Bucket:    restargs[0],
-		Immediate: immediate,
-		Keep:      keep,
+		Bucket: restargs[0],
+		Keep:   true,
 	}
 	tasks := getTasks(tasksURL, opt)
 	for {
@@ -415,8 +440,13 @@ func runWait(scheme, host, port string, restargs []string, immediate, keep, outp
 			break
 		}
 		if tasksAllDone(tasks) {
+			opt.Keep = keep // to flush tasks
+			logMsg("runWait flush %v", opt)
+			getTasks(tasksURL, opt)
 			break
 		}
+		logMsg("runWait tasks %v", len(tasks))
+		<-time.After(time.Second)
 		tasks = getTasks(tasksURL, opt)
 	}
 
