@@ -1,4 +1,14 @@
 
+0.0.1-beta2
+
+  * improve cli args, fixed tasks flush
+
+  - mh-cbon <mh-cbon@users.noreply.github.com>
+
+-- mh-cbon <mh-cbon@users.noreply.github.com>; Sat, 22 Apr 2017 18:53:30 +0200
+
+
+
 0.0.1-beta1
 
   * add json output
