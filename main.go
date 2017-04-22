@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"os"
@@ -109,8 +108,8 @@ func showHelp() {
 #### add tasks to bucket 1
 
     cct -add 1 ls -al
-    cct -add 1 wait 10
-    cct -add 1 wait 5
+    cct -add 1 sleep 10
+    cct -add 1 sleep 5
 
 #### wait completion of the bucket 1
 
@@ -405,10 +404,7 @@ func getTasks(url string, opt GetTasksOptions) []Task {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var bb bytes.Buffer
-	io.Copy(&bb, res.Body)
-	fmt.Println(bb.String())
-	if err = json.NewDecoder(&bb).Decode(&ret); err != nil {
+	if err = json.NewDecoder(res.Body).Decode(&ret); err != nil {
 		log.Fatal(err)
 	}
 	defer res.Body.Close()
