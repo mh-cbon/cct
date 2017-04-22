@@ -34,7 +34,7 @@
 <ul>
   <li><a href="#install">Install</a>
     <ul>
-      <li><a href="#glide">glide</a></li>
+      <li><a href="#go">go</a></li>
       <li><a href="#linux-rpmdeb-repository">linux rpm/deb repository</a></li>
       <li><a href="#linux-rpmdeb-standalone-package">linux rpm/deb standalone package</a></li>
     </ul>
@@ -94,12 +94,8 @@
 
 <p>Check the <a href="https://github.com/mh-cbon/cct/releases">release page</a>!</p>
 
-<h4 id="glide">glide</h4>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>mkdir -p <span class="nv">$GOPATH</span>/src/github.com/mh-cbon/cct
-<span class="nb">cd</span> <span class="nv">$GOPATH</span>/src/github.com/mh-cbon/cct
-git clone https://github.com/mh-cbon/cct.git .
-glide install
-go install
+<h4 id="go">go</h4>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>go get github.com/mh-cbon/cct
 </code></pre>
 </div>
 
@@ -210,13 +206,18 @@ cct -a 1 sleep 5
 </div>
 
 <p>Use [-keep|-k] and [-immediate|-i] options to only
-	query the status of every commands in the bucket 1.</p>
+  query the status of every commands in the bucket 1.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Those options prevent the bucket to be emptied.
+<p>Those options prevent the bucket to be emptied.</p>
 
-Use [-json|-j] option to return a JSON obect of []Task.
-</code></pre>
-</div>
+<table>
+  <tbody>
+    <tr>
+      <td>Use [-json</td>
+      <td>-j] option to return a JSON obect of []Task.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="release-the-project">Release the project</h4>
 
