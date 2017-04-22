@@ -22,7 +22,7 @@ Package cct is a cli program to run concurrent command lines
 - [Example](#example)
   - [add tasks to bucket 1](#add-tasks-to-bucket-1)
   - [wait completion of the bucket 1](#wait-completion-of-the-bucket-1)
-  - [get status of the bucket 1](#get-status-of-the-bucket-1)
+  - [query status of the bucket 1](#query-status-of-the-bucket-1)
   - [Release the project](#release-the-project)
 - [History](#history)
 
@@ -114,15 +114,17 @@ cct is a cli program to run concurrent command lines
     cct -wait 1
 
   Running the command again will return immediately,
-	the response is an empty list as the bucket 1 was flushed by the previous call.
+	the response is an empty list
+	as the bucket 1 was flushed by the previous call.
 
-#### get status of the bucket 1
+#### query status of the bucket 1
 
     cct -wait -keep -immediate -json 1
 
   Use -keep and -immediate options to only
-	query the status of every command of bucket 1
-	those options prevent the bucket to be emptied.
+	query the status of every commands in the bucket 1.
+
+	Those options prevent the bucket to be emptied.
 
 #### Release the project
 

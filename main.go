@@ -121,15 +121,17 @@ func showHelp() {
     cct -wait 1
 
   Running the command again will return immediately,
-	the response is an empty list as the bucket 1 was flushed by the previous call.
+	the response is an empty list
+	as the bucket 1 was flushed by the previous call.
 
-#### get status of the bucket 1
+#### query status of the bucket 1
 
     cct -wait -keep -immediate -json 1
 
   Use -keep and -immediate options to only
-	query the status of every command of bucket 1
-	those options prevent the bucket to be emptied.
+	query the status of every commands in the bucket 1.
+
+	Those options prevent the bucket to be emptied.
 `)
 }
 
