@@ -53,8 +53,8 @@
           <tbody>
             <tr>
               <td>[$ cct -add</td>
-              <td>-a $bucket $cmd](#-cct–add</td>
-              <td>-a-bucket-cmd)</td>
+              <td>-a [-timeout n] $bucket $cmd](#-cct–add</td>
+              <td>-a-[-timeout-n]-bucket-cmd)</td>
             </tr>
           </tbody>
         </table>
@@ -137,7 +137,7 @@ https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh <span class="
 </code></pre>
 </div>
 
-<h4 id="-cct--add-a-bucket-cmd">$ cct -add|-a $bucket $cmd</h4>
+<h4 id="-cct--add-a--timeout-n-bucket-cmd">$ cct -add|-a [-timeout n] $bucket $cmd</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Add $cmd to given $bucket
 </code></pre>
@@ -171,7 +171,7 @@ The backend watches for all http activities and delay the timeout.
 
 <h4 id="add-tasks-to-bucket-1">add tasks to bucket 1</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cct -a 1 sleep 2
+<div class="highlighter-rouge"><pre class="highlight"><code>cct -add -timeout 2 1 sleep 2
 cct -a 1 sleep 10
 cct -a 1 sleep 5
 </code></pre>
