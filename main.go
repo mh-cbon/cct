@@ -89,8 +89,8 @@ func showHelp() {
     Wait for <bucket> commands completion, prints command results.
     When a command of the bucket is finished and queried, it is removed.
 
-    __-immediate__: prevent the program to wait for bucket completion before returning.
-    __-keep__: prevent the program to remove finished commands of the bucket being queried.
+    -immediate: prevent the program to wait for bucket completion before returning.
+    -keep: prevent the program to remove finished commands of the bucket being queried.
 
 #### $ cct -backend [-verbose] [-timeout n]
 
@@ -102,7 +102,7 @@ func showHelp() {
 
     The backend watches for all http activities and delay the timeout.
 
-    -__timeout n__: duration length before the backend exits automatically.
+    -timeout n: duration length before the backend exits automatically.
 
 # Example
 
