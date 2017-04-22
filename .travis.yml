@@ -26,7 +26,12 @@ install:
   - go install
 
 script:
-  - echo "pass"
+  - go run main.go -help
+  - mkdir -p build/{386,amd64}
+  - GOOS=linux GOARCH=386 go build --ldflags "-X main.VERSION=${TRAVIS_TAG}" -o build/386/$APP main.go
+  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.VERSION=${TRAVIS_TAG}" -o build/amd64/$APP main.go
+  - curl -L https://raw.githubusercontent.com/mh-cbon/go-bin-deb/master/create-pkg.sh | GH=$GH sh -xe
+  - curl -L https://raw.githubusercontent.com/mh-cbon/go-bin-rpm/master/create-pkg.sh | GH=$GH sh -xe
 
 
 before_deploy:
