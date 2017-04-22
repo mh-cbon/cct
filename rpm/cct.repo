@@ -1,0 +1,7 @@
+[cct]
+name=cct is a cli program to run concurrent command lines
+
+baseurl=https://mh-cbon.github.io/cct/rpm/$basearch/
+enabled=1
+skip_if_unavailable=1
+gpgcheck=0
