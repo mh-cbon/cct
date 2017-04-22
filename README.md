@@ -8,7 +8,7 @@ Package cct is a cli program to run concurrent command lines
 
 # TOC
 - [Install](#install)
-  - [glide](#glide)
+  - [go](#go)
   - [linux rpm/deb repository](#linux-rpmdeb-repository)
   - [linux rpm/deb standalone package](#linux-rpmdeb-standalone-package)
 - [Cli](#cli)
@@ -30,13 +30,9 @@ Package cct is a cli program to run concurrent command lines
 
 Check the [release page](https://github.com/mh-cbon/cct/releases)!
 
-#### glide
+#### go
 ```sh
-mkdir -p $GOPATH/src/github.com/mh-cbon/cct
-cd $GOPATH/src/github.com/mh-cbon/cct
-git clone https://github.com/mh-cbon/cct.git .
-glide install
-go install
+go get github.com/mh-cbon/cct
 ```
 
 #### linux rpm/deb repository
