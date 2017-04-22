@@ -1,5 +1,19 @@
 # Changelog - cct
 
+### 0.0.1-beta5
+
+__Changes__
+
+- add cmd: new -timeout option is sent to backend initialization
+
+__Contributors__
+
+- mh-cbon
+
+Released by mh-cbon, Sat 22 Apr 2017 -
+[see the diff](https://github.com/mh-cbon/cct/compare/0.0.1-beta4...0.0.1-beta5#diff)
+______________
+
 ### 0.0.1-beta4
 
 __Changes__
