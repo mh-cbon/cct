@@ -1,44 +1,44 @@
 =============== Apr 22, 2017 (UTC) ===============
-15:26:11.453408 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-15:26:11.453578 db@open opening
-15:26:11.453819 version@stat F·[] S·0B[] Sc·[]
-15:26:11.457926 db@janitor F·2 G·0
-15:26:11.457964 db@open done T·4.375852ms
-15:26:11.458146 db@close closing
-15:26:11.458185 db@close done T·37.145µs
+16:18:17.008674 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:18:17.008863 db@open opening
+16:18:17.009129 version@stat F·[] S·0B[] Sc·[]
+16:18:17.014177 db@janitor F·2 G·0
+16:18:17.014230 db@open done T·5.353455ms
+16:18:17.014425 db@close closing
+16:18:17.014470 db@close done T·43.267µs
 =============== Apr 22, 2017 (UTC) ===============
-15:26:11.468214 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-15:26:11.468390 version@stat F·[] S·0B[] Sc·[]
-15:26:11.468404 db@open opening
-15:26:11.468455 journal@recovery F·1
-15:26:11.468619 journal@recovery recovering @1
-15:26:11.473035 memdb@flush created L0@2 N·1 S·299B "L13..909,v1":"L13..909,v1"
-15:26:11.473404 version@stat F·[1] S·299B[299B] Sc·[0.25]
-15:26:11.473774 db@janitor F·3 G·0
-15:26:11.473800 db@open done T·5.385864ms
-15:26:11.524601 db@close closing
-15:26:11.524667 db@close done T·61.916µs
+16:18:17.022387 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:18:17.022566 version@stat F·[] S·0B[] Sc·[]
+16:18:17.022577 db@open opening
+16:18:17.022649 journal@recovery F·1
+16:18:17.023566 journal@recovery recovering @1
+16:18:17.027173 memdb@flush created L0@2 N·1 S·299B "L60..4f6,v1":"L60..4f6,v1"
+16:18:17.027591 version@stat F·[1] S·299B[299B] Sc·[0.25]
+16:18:17.028817 db@janitor F·3 G·0
+16:18:17.028846 db@open done T·6.259519ms
+16:18:17.132882 db@close closing
+16:18:17.133088 db@close done T·200.558µs
 =============== Apr 22, 2017 (UTC) ===============
-15:26:11.533619 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-15:26:11.533756 version@stat F·[1] S·299B[299B] Sc·[0.25]
-15:26:11.533764 db@open opening
-15:26:11.533801 journal@recovery F·1
-15:26:11.534291 journal@recovery recovering @3
-15:26:11.537564 memdb@flush created L0@5 N·9 S·1KiB "E13..909,v11":"xFP..6b4,v4"
-15:26:11.537913 version@stat F·[2] S·1KiB[1KiB] Sc·[0.50]
-15:26:11.538322 db@janitor F·4 G·0
-15:26:11.538361 db@open done T·4.587384ms
-15:26:11.890530 db@close closing
-15:26:11.890616 db@close done T·82.486µs
+16:18:17.142550 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:18:17.142786 version@stat F·[1] S·299B[299B] Sc·[0.25]
+16:18:17.142798 db@open opening
+16:18:17.142849 journal@recovery F·1
+16:18:17.143480 journal@recovery recovering @3
+16:18:17.148046 memdb@flush created L0@5 N·13 S·1KiB "E60..4f6,v15":"xFP..e9e,v4"
+16:18:17.148506 version@stat F·[2] S·2KiB[2KiB] Sc·[0.50]
+16:18:17.149283 db@janitor F·4 G·0
+16:18:17.149339 db@open done T·6.527241ms
+16:18:17.703234 db@close closing
+16:18:17.703350 db@close done T·116.778µs
 =============== Apr 22, 2017 (UTC) ===============
-15:26:11.898714 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-15:26:11.898939 version@stat F·[2] S·1KiB[1KiB] Sc·[0.50]
-15:26:11.898953 db@open opening
-15:26:11.899027 journal@recovery F·1
-15:26:11.899754 journal@recovery recovering @6
-15:26:11.903663 memdb@flush created L0@8 N·4 S·584B "E4e..rib,v16":"xCP..6b4,v14"
-15:26:11.903990 version@stat F·[3] S·2KiB[2KiB] Sc·[0.75]
-15:26:11.904895 db@janitor F·5 G·0
-15:26:11.904921 db@open done T·5.957378ms
-15:26:11.906436 db@close closing
-15:26:11.906489 db@close done T·51.076µs
+16:18:17.712940 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:18:17.713104 version@stat F·[2] S·2KiB[2KiB] Sc·[0.50]
+16:18:17.713114 db@open opening
+16:18:17.713162 journal@recovery F·1
+16:18:17.713926 journal@recovery recovering @6
+16:18:17.718717 memdb@flush created L0@8 N·5 S·628B "Ef3..rib,v21":"xCP..e9e,v17"
+16:18:17.719314 version@stat F·[3] S·2KiB[2KiB] Sc·[0.75]
+16:18:17.721279 db@janitor F·5 G·0
+16:18:17.721307 db@open done T·8.18448ms
+16:18:17.721823 db@close closing
+16:18:17.722118 db@close done T·291.627µs

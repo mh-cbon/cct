@@ -5,6 +5,24 @@ Installed-Size: 5.2 kB
 Maintainer: mh-cbon <mh-cbon@users.noreply.github.com>
 Architecture: i386
 Source: cct
+Version: 0.0.1-beta1
+Filename: pool/contrib/c/cct/cct-0.0.1-beta1_386.deb
+Size: 1609078
+MD5sum: 903a7d05f8ddebcacd25751cb2557e19
+SHA1: a3415899b5f9b84f50db429d8a2367332018c911
+SHA256: d8359410a4c2d7e9c478ed8088b2647a12d9cf3609b489f4bf242739cd1e006a
+SHA512: 29651b22b008df88c8b1c3140e86da75042035dfc6205274c47f6f60171eec41f7e2c53ad751d89a1d40cd0016a8b787dd5814f4a631f86e57c3ace569e39414
+Description: cct is a cli program to run concurrent command lines
+Homepage: http://github.com/mh-cbon/cct
+Package-Type: deb
+
+Package: cct
+Priority: extra
+Section: unknown
+Installed-Size: 5.2 kB
+Maintainer: mh-cbon <mh-cbon@users.noreply.github.com>
+Architecture: i386
+Source: cct
 Version: 0.0.1-beta
 Filename: pool/contrib/c/cct/cct-0.0.1-beta_386.deb
 Size: 1610016
