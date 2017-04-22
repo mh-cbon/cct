@@ -1,6 +1,6 @@
 # cct
 
-[![travis Status](https://travis-ci.org/mh-cbon/cct.svg?branch=master)](https://travis-ci.org/mh-cbon/cct)
+[![travis Status](https://travis-ci.org/mh-cbon/cct.svg?branch=master)](https://travis-ci.org/mh-cbon/cct) 
 [![appveyor Status](https://ci.appveyor.com/api/projects/status/github/mh-cbon/cct?branch=master&svg=true)](https://ci.appveyor.com/project/mh-cbon/cct) [![Go Report Card](https://goreportcard.com/badge/github.com/mh-cbon/cct)](https://goreportcard.com/report/github.com/mh-cbon/cct) [![GoDoc](https://godoc.org/github.com/mh-cbon/cct?status.svg)](http://godoc.org/github.com/mh-cbon/cct) [![MIT License](http://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Package cct is a cli program to run concurrent command lines
@@ -16,8 +16,8 @@ Package cct is a cli program to run concurrent command lines
 - [Usage](#usage)
   - [$ cct -version](#-cct--version)
   - [$ cct -help](#-cct--help)
-  - [$ cct -add $bucket $cmd](#-cct--add-bucket-cmd)
-  - [$ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket](#-cct--wait-[-verbose]-[-keep]-[-immediate]-[-json]-bucket)
+  - [$ cct -add|-a $bucket $cmd](#-cct--add|-a-bucket-cmd)
+  - [$ cct -wait|-w [-verbose] [-keep|-k] [-immediate|-i] [-json|-j] $bucket](#-cct--wait|-w-[-verbose]-[-keep|-k]-[-immediate|-i]-[-json|-j]-bucket)
   - [$ cct -backend [-verbose] [-timeout n]](#-cct--backend-[-verbose]-[-timeout-n])
 - [Example](#example)
   - [add tasks to bucket 1](#add-tasks-to-bucket-1)
@@ -73,11 +73,11 @@ cct is a cli program to run concurrent command lines
 
     Show this help
 
-#### $ cct -add $bucket $cmd
+#### $ cct -add|-a $bucket $cmd
 
     Add $cmd to given $bucket
 
-#### $ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket
+#### $ cct -wait|-w [-verbose] [-keep|-k] [-immediate|-i] [-json|-j] $bucket
 
     Wait for <bucket> commands completion, prints command results.
     When a command of the bucket is finished and queried, it is removed.
@@ -101,11 +101,12 @@ cct is a cli program to run concurrent command lines
 
 #### add tasks to bucket 1
 
-    go install
-    cct -add 1 sleep 2
-    cct -add 1 sleep 10
-    cct -add 1 sleep 5
-    cct -wait -verbose 1
+		cct -a 1 sleep 2
+		cct -a 1 sleep 10
+		cct -a 1 sleep 5
+
+		Note: using a one liner syntax would result in a totally different result!
+		cct -a 1 sleep 10;cct -a 1 sleep 10
 
 #### wait completion of the bucket 1
 
@@ -113,7 +114,7 @@ cct is a cli program to run concurrent command lines
 
   This command will wait for the completion of all three commands added to the bucket 1
 
-    cct -wait 1
+    cct -w 1
 
   Running the command again will return immediately,
 	the response is an empty list
@@ -121,12 +122,14 @@ cct is a cli program to run concurrent command lines
 
 #### query status of the bucket 1
 
-    cct -wait -keep -immediate -json 1
+    cct -w -k -i -j 1
 
-  Use -keep and -immediate options to only
+  Use [-keep|-k] and [-immediate|-i] options to only
 	query the status of every commands in the bucket 1.
 
 	Those options prevent the bucket to be emptied.
+
+	Use [-json|-j] option to return a JSON obect of []Task.
 
 #### Release the project
 
