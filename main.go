@@ -441,14 +441,17 @@ func runWait(scheme, host, port string, restargs []string, immediate, keep, outp
 			break
 		}
 		if tasksAllDone(tasks) {
-			opt.Keep = keep // to flush tasks
-			logMsg("runWait flush %v", opt)
-			getTasks(tasksURL, opt)
 			break
 		}
 		logMsg("runWait tasks %v", len(tasks))
 		<-time.After(time.Second)
 		tasks = getTasks(tasksURL, opt)
+	}
+
+	if !keep {
+		opt.Keep = false // to flush tasks
+		logMsg("runWait flush %v", opt)
+		getTasks(tasksURL, opt)
 	}
 
 	if outputJSON {
