@@ -125,12 +125,12 @@ Note: using a one liner syntax would result in a totally different result!
 
     cct -w -k -i -j 1
 
-	Use [-keep|-k] and [-immediate|-i] options to only
-	query the status of every commands in the bucket 1.
+  Use [-keep|-k] and [-immediate|-i] options to only
+  query the status of every commands in the bucket 1.
 
-	Those options prevent the bucket to be emptied.
+  Those options prevent the bucket to be emptied.
 
-	Use [-json|-j] option to return a JSON obect of []Task.
+  Use [-json|-j] option to return a JSON obect of []Task.
 
 #### Release the project
 
