@@ -1,0 +1,18 @@
+Package: cct
+Priority: extra
+Section: unknown
+Installed-Size: 6.3 kB
+Maintainer: mh-cbon <mh-cbon@users.noreply.github.com>
+Architecture: amd64
+Source: cct
+Version: 0.0.1-beta
+Filename: pool/contrib/c/cct/cct-0.0.1-beta_amd64.deb
+Size: 1700626
+MD5sum: ac3f9fdc4f2199e6bc05051c22e82120
+SHA1: a59e8d6d7250a37817ef63760bd99a8fa5c7c83b
+SHA256: 7c02f66c433796fa765187112313423e3519e0a9cc8231499c9435b1c65c9b92
+SHA512: 0cc58567c95f4a3d73ea088d778e80fad63c83a0d4746a609f36bc5e8d6b73d5bca1ce3d427e6cb98bfd4050361f72cdb4aec938323b860a35b2d1ddd1780158
+Description: cct is a cli program to run concurrent command lines
+Package-Type: deb
+Homepage: http://github.com/mh-cbon/cct
+
