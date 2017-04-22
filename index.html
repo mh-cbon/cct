@@ -23,61 +23,139 @@
 
     <section class="main-content">
       
-      <p><a href="https://travis-ci.org/mh-cbon/cct"><img src="https://travis-ci.org/mh-cbon/cct.svg?branch=master" alt="travis Status" /></a> 
+      <h1 id="cct">cct</h1>
+
+<p><a href="https://travis-ci.org/mh-cbon/cct"><img src="https://travis-ci.org/mh-cbon/cct.svg?branch=master" alt="travis Status" /></a> 
 <a href="https://ci.appveyor.com/project/mh-cbon/cct"><img src="https://ci.appveyor.com/api/projects/status/github/mh-cbon/cct?branch=master&amp;svg=true" alt="appveyor Status" /></a> <a href="https://goreportcard.com/report/github.com/mh-cbon/cct"><img src="https://goreportcard.com/badge/github.com/mh-cbon/cct" alt="Go Report Card" /></a> <a href="http://godoc.org/github.com/mh-cbon/cct"><img src="https://godoc.org/github.com/mh-cbon/cct?status.svg" alt="GoDoc" /></a> <a href="LICENSE"><img src="http://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" /></a></p>
 
-<h1 id="cct">cct</h1>
+<p>Package cct is a cli program to run concurrent command lines</p>
+
+<h1 id="toc">TOC</h1>
+<ul>
+  <li><a href="#install">Install</a>
+    <ul>
+      <li><a href="#glide">glide</a></li>
+      <li><a href="#linux-rpmdeb-repository">linux rpm/deb repository</a></li>
+      <li><a href="#linux-rpmdeb-standalone-package">linux rpm/deb standalone package</a></li>
+    </ul>
+  </li>
+  <li><a href="#cli">Cli</a>
+    <ul>
+      <li><a href="#cct-1">cct</a></li>
+    </ul>
+  </li>
+  <li><a href="#usage">Usage</a>
+    <ul>
+      <li><a href="#-cct--version">$ cct -version</a></li>
+      <li><a href="#-cct--help">$ cct -help</a></li>
+      <li><a href="#-cct--add-bucket-cmd">$ cct -add $bucket $cmd</a></li>
+      <li><a href="#-cct--wait-[-verbose]-[-keep]-[-immediate]-[-json]-bucket">$ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket</a></li>
+      <li><a href="#-cct--backend-[-verbose]-[-timeout-n]">$ cct -backend [-verbose] [-timeout n]</a></li>
+    </ul>
+  </li>
+  <li><a href="#example">Example</a>
+    <ul>
+      <li><a href="#add-tasks-to-bucket-1">add tasks to bucket 1</a></li>
+      <li><a href="#wait-completion-of-the-bucket-1">wait completion of the bucket 1</a></li>
+      <li><a href="#query-status-of-the-bucket-1">query status of the bucket 1</a></li>
+      <li><a href="#release-the-project">Release the project</a></li>
+    </ul>
+  </li>
+  <li><a href="#history">History</a></li>
+</ul>
+
+<h1 id="install">Install</h1>
+
+<p>Check the <a href="https://github.com/mh-cbon/cct/releases">release page</a>!</p>
+
+<h4 id="glide">glide</h4>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>mkdir -p <span class="nv">$GOPATH</span>/src/github.com/mh-cbon/cct
+<span class="nb">cd</span> <span class="nv">$GOPATH</span>/src/github.com/mh-cbon/cct
+git clone https://github.com/mh-cbon/cct.git .
+glide install
+go install
+</code></pre>
+</div>
+
+<h4 id="linux-rpmdeb-repository">linux rpm/deb repository</h4>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>wget -O - https://raw.githubusercontent.com/mh-cbon/latest/master/source.sh <span class="se">\</span>
+| <span class="nv">GH</span><span class="o">=</span>mh-cbon/cct sh -xe
+<span class="c"># or</span>
+curl -L https://raw.githubusercontent.com/mh-cbon/latest/master/source.sh <span class="se">\</span>
+| <span class="nv">GH</span><span class="o">=</span>mh-cbon/cct sh -xe
+</code></pre>
+</div>
+
+<h4 id="linux-rpmdeb-standalone-package">linux rpm/deb standalone package</h4>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -L https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh <span class="se">\</span>
+| <span class="nv">GH</span><span class="o">=</span>mh-cbon/cct sh -xe
+<span class="c"># or</span>
+wget -q -O - --no-check-certificate <span class="se">\</span>
+https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh <span class="se">\</span>
+| <span class="nv">GH</span><span class="o">=</span>mh-cbon/cct sh -xe
+</code></pre>
+</div>
+
+<h1 id="cli">Cli</h1>
+
+<h2 id="cct-1">cct</h2>
 <p>cct is a cli program to run concurrent command lines</p>
 
 <h1 id="usage">Usage</h1>
 
-<h3 id="-cct--version">$ cct -version</h3>
+<h4 id="-cct--version">$ cct -version</h4>
 
-<p>Show version</p>
-
-<h3 id="-cct--help">$ cct -help</h3>
-
-<p>Show this help</p>
-
-<h3 id="-cct--add--">$ cct -add <bucket> <cmd></cmd></bucket></h3>
-
-<p>Add <cmd> to given <bucket></bucket></cmd></p>
-
-<h3 id="-cct--wait--verbose--keep--immediate--json-">$ cct -wait [-verbose] [-keep] [-immediate] [-json] <bucket></bucket></h3>
-
-<p>Wait for <bucket> commands completion, prints command results.
-  When a command of the bucket is finished, it is removed.</bucket></p>
-
-<ul>
-  <li>-immediate: prevent the program to wait for bucket completion before returning.</li>
-  <li>-keep: prevent the program to remove finished commands of the bucket being queried.</li>
-</ul>
-
-<h3 id="-cct--backend--verbose--timeout-n">$ cct -backend [-verbose] [-timeout n]</h3>
-
-<p>Start the backend to execute commands concurrently.</p>
-
-<p>The backend automatically exists after duration <n> when</n></p>
-<ul>
-  <li>tasks list is empty</li>
-  <li>tasks are finished</li>
-</ul>
-
-<p>The backend listens to http activity to delay the timeout.</p>
-
-<p>-timeout n: duration length before the backend exits.</p>
-
-<h1 id="example">Example</h1>
-
-<h3 id="add-a-tasks-to-bucket-1">add a tasks to bucket 1</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>cct -add 1 ls -al
-cct -add 1 wait 10
-cct -add 1 wait 5
+<div class="highlighter-rouge"><pre class="highlight"><code>Show version
 </code></pre>
 </div>
 
-<h3 id="wait-completion-of-the-bucket-1">wait completion of the bucket 1</h3>
+<h4 id="-cct--help">$ cct -help</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Show this help
+</code></pre>
+</div>
+
+<h4 id="-cct--add-bucket-cmd">$ cct -add $bucket $cmd</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Add $cmd to given $bucket
+</code></pre>
+</div>
+
+<h4 id="-cct--wait--verbose--keep--immediate--json-bucket">$ cct -wait [-verbose] [-keep] [-immediate] [-json] $bucket</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Wait for &lt;bucket&gt; commands completion, prints command results.
+When a command of the bucket is finished and queried, it is removed.
+
+-immediate: prevent the program to wait for bucket completion before returning.
+-keep: prevent the program to remove finished commands of the bucket being queried.
+</code></pre>
+</div>
+
+<h4 id="-cct--backend--verbose--timeout-n">$ cct -backend [-verbose] [-timeout n]</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Start the backend to execute commands concurrently.
+
+The backend automatically exits after duration &lt;n&gt; when
+- tasks list is empty
+- tasks are finished
+
+The backend watches for all http activities and delay the timeout.
+
+-timeout n: duration length before the backend exits automatically.
+</code></pre>
+</div>
+
+<h1 id="example">Example</h1>
+
+<h4 id="add-tasks-to-bucket-1">add tasks to bucket 1</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cct -add 1 ls -al
+cct -add 1 sleep 10
+cct -add 1 sleep 5
+</code></pre>
+</div>
+
+<h4 id="wait-completion-of-the-bucket-1">wait completion of the bucket 1</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>cct -wait 1
 </code></pre>
@@ -89,17 +167,22 @@ cct -add 1 wait 5
 </code></pre>
 </div>
 
-<p>Running the command againg will immediately return an empty result
-  as the bucket 1 has been emptied by the previous call.</p>
+<p>Running the command again will return immediately,
+	the response is an empty list
+	as the bucket 1 was flushed by the previous call.</p>
 
-<h3 id="get-status-of-the-bucket-1">get status of the bucket 1</h3>
+<h4 id="query-status-of-the-bucket-1">query status of the bucket 1</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>cct -wait -keep -immediate -json 1
 </code></pre>
 </div>
 
-<p>Using <strong>-keep</strong> and <strong>-immediate</strong> options to query the bucket 1
-  will give you the status of all tasks in this bucket.</p>
+<p>Use -keep and -immediate options to only
+	query the status of every commands in the bucket 1.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Those options prevent the bucket to be emptied.
+</code></pre>
+</div>
 
 <h4 id="release-the-project">Release the project</h4>
 
