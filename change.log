@@ -1,4 +1,16 @@
 
+0.0.1-beta1
+
+  * add json output
+  * update the README
+  * improved -help page
+
+  - mh-cbon <mh-cbon@users.noreply.github.com>
+
+-- mh-cbon <mh-cbon@users.noreply.github.com>; Sat, 22 Apr 2017 18:09:24 +0200
+
+
+
 0.0.1-beta
 
   * init
